@@ -7,7 +7,7 @@
 
 Name:           python-%{pname}
 Version:        0.12.14
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        YAML 1.2 loader/dumper package for Python 
 
 License:        MIT
@@ -87,5 +87,8 @@ rm -rf %{pypi_name}.egg-info
 %endif
 
 %changelog
+* Mon Oct 24 2016 Chandan Kumar <chkumar@redhat.com> - 0.12.14-2
+- Fixed python2-typing runtime dependency issue
+
 * Fri Oct 14 2016 Chandan Kumar <chkumar@redhat.com> - 0.12.14-1
 - Initial package.
