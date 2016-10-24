@@ -31,7 +31,7 @@ Summary:        YAML 1.2 loader/dumper package for Python
 %{?python_provide:%python_provide python2-%{pypi_name}}
  
 Requires:       python-ruamel-ordereddict
-Requires:       python-typing
+Requires:       python2-typing
 Requires:       python-setuptools
 
 %description -n python2-%{pname}
@@ -44,7 +44,6 @@ Summary:        YAML 1.2 loader/dumper package for Python
 %{?python_provide:%python_provide python3-%{pypi_name}}
 
 Requires:       python3-ruamel-ordereddict
-Requires:       python3-typing
 Requires:       python3-setuptools
 
 %description -n python3-%{pname}
