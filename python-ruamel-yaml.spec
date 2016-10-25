@@ -2,12 +2,13 @@
 %global pname ruamel-yaml
 
 %if 0%{?fedora}
-%global with_python3 1
+# Disabling python3 as python3-ruamel-ordereddict is not available
+%global with_python3 0
 %endif
 
 Name:           python-%{pname}
 Version:        0.12.14
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        YAML 1.2 loader/dumper package for Python 
 
 License:        MIT
@@ -87,6 +88,9 @@ rm -rf %{pypi_name}.egg-info
 %endif
 
 %changelog
+* Tue Oct 25 2016 Chandan Kumar <chkumar@redhat.com> - 0.12.14-3
+- Disabling python3 as python3-ruamel-ordereddict not available
+
 * Mon Oct 24 2016 Chandan Kumar <chkumar@redhat.com> - 0.12.14-2
 - Fixed python2-typing runtime dependency issue
 
