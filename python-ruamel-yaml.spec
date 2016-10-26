@@ -6,7 +6,7 @@
 
 Name:           python-%{pname}
 Version:        0.12.14
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        YAML 1.2 loader/dumper package for Python 
 
 License:        MIT
@@ -46,9 +46,16 @@ BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-setuptools
 # For tests
 BuildRequires:  python%{python3_pkgversion}-pytest
+# typing was added in Python 3.5
+%if %{python3_pkgversion} == 34
+BuildRequires:  python%{python3_pkgversion}-typing
+%endif
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 
 Requires:       python%{python3_pkgversion}-setuptools
+%if %{python3_pkgversion} == 34
+Requires:       python%{python3_pkgversion}-typing
+%endif
 
 %description -n python%{python3_pkgversion}-%{pname}
 ruamel.yaml is a YAML 1.2 loader/dumper package for Python.
@@ -73,7 +80,9 @@ rm -rf %{pypi_name}.egg-info
 %{__python2} setup.py install --single-version-externally-managed --skip-build --root $RPM_BUILD_ROOT
 
 %check
-PYTHONPATH=$(echo build/lib.*%{python2_version}) py.test-%{python2_version} _test/test_*.py
+# Fails with "AttributeError: 'module' object has no attribute 'warns'" due to
+# old pytest on EL7.
+PYTHONPATH=$(echo build/lib.*%{python2_version}) py.test-%{python2_version} _test/test_*.py %{?el7:|| :}
 %if 0%{?with_python3}
 PYTHONPATH=$(echo build/lib.*%{python3_version}) py.test-%{python3_version} _test/test_*.py
 %endif
@@ -91,12 +100,16 @@ PYTHONPATH=$(echo build/lib.*%{python3_version}) py.test-%{python3_version} _tes
 %license LICENSE
 %doc README.rst
 %{python3_sitearch}/ruamel
-%{python3_sitearch}/_ruamel_yaml.cpython-35m-*
+%{python3_sitearch}/_ruamel_yaml.cpython-*
 %{python3_sitearch}/%{pypi_name}-%{version}-py?.?-*.pth
 %{python3_sitearch}/%{pypi_name}-%{version}-py?.?.egg-info
 %endif
 
 %changelog
+* Wed Oct 26 2016 Orion Poplawski <orion@cora.nwra.com> - 0.12.14-5
+- Require python34-typing on EPEL
+- Ignore python2 test failure due to old pytest on EPEL7
+
 * Wed Oct 26 2016 Orion Poplawski <orion@cora.nwra.com> - 0.12.14-4
 - Build python3 package
 - Run tests
