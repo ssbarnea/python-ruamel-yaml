@@ -6,7 +6,7 @@
 
 Name:           python-%{pname}
 Version:        0.12.14
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        YAML 1.2 loader/dumper package for Python 
 
 License:        MIT
@@ -106,6 +106,9 @@ PYTHONPATH=$(echo build/lib.*%{python3_version}) py.test-%{python3_version} _tes
 %endif
 
 %changelog
+* Mon Dec 19 2016 Miro Hrončok <mhroncok@redhat.com> - 0.12.14-6
+- Rebuild for Python 3.6
+
 * Wed Oct 26 2016 Orion Poplawski <orion@cora.nwra.com> - 0.12.14-5
 - Require python34-typing on EPEL
 - Ignore python2 test failure due to old pytest on EPEL7
