@@ -1,0 +1,19 @@
+diff -up ruamel-yaml-171c3653fc01/_test/test_anchor.py.pytest27 ruamel-yaml-171c3653fc01/_test/test_anchor.py
+--- ruamel-yaml-171c3653fc01/_test/test_anchor.py.pytest27	2016-09-21 02:09:18.000000000 -0600
++++ ruamel-yaml-171c3653fc01/_test/test_anchor.py	2017-01-31 15:25:09.245847125 -0700
+@@ -5,6 +5,7 @@ testing of anchors and the aliases refer
+ """
+ 
+ import pytest
++from distutils.version import LooseVersion
+ from textwrap import dedent
+ import platform
+ 
+@@ -231,6 +232,7 @@ class TestAnchorsAliases:
+         """)
+ 
+     # this is an error in PyYAML
++    @pytest.mark.skipif(LooseVersion(pytest.__version__) < LooseVersion("2.8"), reason="Need pytest 2.7")
+     def test_reused_anchor(self):
+         yaml = '''
+         - &a

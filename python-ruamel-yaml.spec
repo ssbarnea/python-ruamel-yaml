@@ -6,7 +6,7 @@
 
 Name:           python-%{pname}
 Version:        0.12.14
-Release:        6%{?dist}
+Release:        7%{?dist}
 Summary:        YAML 1.2 loader/dumper package for Python 
 
 License:        MIT
@@ -14,6 +14,8 @@ URL:            https://bitbucket.org/ruamel/yaml
 #Source0:        https://files.pythonhosted.org/packages/source/r/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
 # Use bitbucket sources so we can run the tests
 Source0:        https://bitbucket.org/ruamel/yaml/get/%{version}.tar.gz#/%{pname}-%{version}.tar.gz
+# Works with pytest 2.7
+Patch0:         python-ruamel-yaml-pytest27.patch
  
 BuildRequires:  libyaml-devel
 
@@ -63,7 +65,7 @@ It is a derivative of Kirill Simonov’s PyYAML 3.11
 %endif
 
 %prep
-%autosetup -n %{pname}-%{commit}
+%autosetup -n %{pname}-%{commit} -p1
 rm -rf %{pypi_name}.egg-info
 
 %build
@@ -80,9 +82,7 @@ rm -rf %{pypi_name}.egg-info
 %{__python2} setup.py install --single-version-externally-managed --skip-build --root $RPM_BUILD_ROOT
 
 %check
-# Fails with "AttributeError: 'module' object has no attribute 'warns'" due to
-# old pytest on EL7.
-PYTHONPATH=$(echo build/lib.*%{python2_version}) py.test-%{python2_version} _test/test_*.py %{?el7:|| :}
+PYTHONPATH=$(echo build/lib.*%{python2_version}) py.test-%{python2_version} _test/test_*.py
 %if 0%{?with_python3}
 PYTHONPATH=$(echo build/lib.*%{python3_version}) py.test-%{python3_version} _test/test_*.py
 %endif
@@ -106,6 +106,9 @@ PYTHONPATH=$(echo build/lib.*%{python3_version}) py.test-%{python3_version} _tes
 %endif
 
 %changelog
+* Tue Jan 31 2017 Orion Poplawski <orion@cora.nwra.com> - 0.12.14-7
+- Add patch to support pytest 2.7 in EPEL7
+
 * Mon Dec 19 2016 Miro Hrončok <mhroncok@redhat.com> - 0.12.14-6
 - Rebuild for Python 3.6
 
