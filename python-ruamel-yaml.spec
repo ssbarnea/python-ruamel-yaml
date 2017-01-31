@@ -1,12 +1,12 @@
 %global pypi_name ruamel.yaml
 %global pname ruamel-yaml
-%global commit 171c3653fc01
+%global commit 113e4054a46c
 
 %global with_python3 1
 
 Name:           python-%{pname}
-Version:        0.12.14
-Release:        7%{?dist}
+Version:        0.13.13
+Release:        1%{?dist}
 Summary:        YAML 1.2 loader/dumper package for Python 
 
 License:        MIT
@@ -106,6 +106,9 @@ PYTHONPATH=$(echo build/lib.*%{python3_version}) py.test-%{python3_version} _tes
 %endif
 
 %changelog
+* Tue Jan 31 2017 Orion Poplawski <orion@cora.nwra.com> - 0.13.13-1
+- Update to 0.13.13
+
 * Tue Jan 31 2017 Orion Poplawski <orion@cora.nwra.com> - 0.12.14-7
 - Add patch to support pytest 2.7 in EPEL7
 
