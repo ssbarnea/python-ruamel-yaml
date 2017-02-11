@@ -6,7 +6,7 @@
 
 Name:           python-%{pname}
 Version:        0.13.13
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        YAML 1.2 loader/dumper package for Python 
 
 License:        MIT
@@ -106,6 +106,9 @@ PYTHONPATH=$(echo build/lib.*%{python3_version}) py.test-%{python3_version} _tes
 %endif
 
 %changelog
+* Sat Feb 11 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0.13.13-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
+
 * Tue Jan 31 2017 Orion Poplawski <orion@cora.nwra.com> - 0.13.13-1
 - Update to 0.13.13
 
