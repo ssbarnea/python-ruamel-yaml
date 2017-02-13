@@ -6,7 +6,7 @@
 
 Name:           python-%{pname}
 Version:        0.13.13
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        YAML 1.2 loader/dumper package for Python 
 
 License:        MIT
@@ -30,11 +30,11 @@ BuildRequires:  python-setuptools
 # For tests
 BuildRequires:  pytest
 BuildRequires:  python2-ruamel-ordereddict
-BuildRequires:  python2-typing
+BuildRequires:  python2-typing >= 3.5.2.2-2
 %{?python_provide:%python_provide python2-%{pypi_name}}
  
 Requires:       python2-ruamel-ordereddict
-Requires:       python2-typing
+Requires:       python2-typing >= 3.5.2.2-2
 Requires:       python-setuptools
 
 %description -n python2-%{pname}
@@ -106,6 +106,10 @@ PYTHONPATH=$(echo build/lib.*%{python3_version}) py.test-%{python3_version} _tes
 %endif
 
 %changelog
+* Mon Feb 13 2017 Jan Chaloupka <jchaloup@redhat.com> - 0.13.13-3
+- The ruamel.yaml needs at least typing >= 3.5.2.2
+  related: #1386563
+
 * Sat Feb 11 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0.13.13-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
 
