@@ -6,7 +6,7 @@
 
 Name:           python-%{pname}
 Version:        0.13.13
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        YAML 1.2 loader/dumper package for Python 
 
 License:        MIT
@@ -106,6 +106,9 @@ PYTHONPATH=$(echo build/lib.*%{python3_version}) py.test-%{python3_version} _tes
 %endif
 
 %changelog
+* Thu Jul 27 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0.13.13-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
+
 * Mon Feb 13 2017 Jan Chaloupka <jchaloup@redhat.com> - 0.13.13-3
 - The ruamel.yaml needs at least typing >= 3.5.2.2
   related: #1386563
