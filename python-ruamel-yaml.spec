@@ -1,12 +1,12 @@
 %global pypi_name ruamel.yaml
 %global pname ruamel-yaml
-%global commit 113e4054a46c
+%global commit f29921d2048e
 
 %global with_python3 1
 
 Name:           python-%{pname}
-Version:        0.13.13
-Release:        5%{?dist}
+Version:        0.13.14
+Release:        1%{?dist}
 Summary:        YAML 1.2 loader/dumper package for Python 
 
 License:        MIT
@@ -106,6 +106,9 @@ PYTHONPATH=$(echo build/lib.*%{python3_version}) py.test-%{python3_version} _tes
 %endif
 
 %changelog
+* Wed Aug 9 2017 Orion Poplawski <orion@nwra.com> - 0.13.14-1
+- Update to 0.13.14
+
 * Thu Aug 03 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0.13.13-5
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Binutils_Mass_Rebuild
 
