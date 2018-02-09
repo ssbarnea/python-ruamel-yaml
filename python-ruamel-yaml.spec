@@ -6,7 +6,7 @@
 
 Name:           python-%{pname}
 Version:        0.13.14
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        YAML 1.2 loader/dumper package for Python 
 
 License:        MIT
@@ -26,16 +26,16 @@ It is a derivative of Kirill Simonov’s PyYAML 3.11
 %package -n     python2-%{pname}
 Summary:        YAML 1.2 loader/dumper package for Python 
 BuildRequires:  python2-devel
-BuildRequires:  python-setuptools
+BuildRequires:  python2-setuptools
 # For tests
-BuildRequires:  pytest
+BuildRequires:  python2-pytest
 BuildRequires:  python2-ruamel-ordereddict
 BuildRequires:  python2-typing >= 3.5.2.2-2
 %{?python_provide:%python_provide python2-%{pypi_name}}
  
 Requires:       python2-ruamel-ordereddict
 Requires:       python2-typing >= 3.5.2.2-2
-Requires:       python-setuptools
+Requires:       python2-setuptools
 
 %description -n python2-%{pname}
 ruamel.yaml is a YAML 1.2 loader/dumper package for Python.
@@ -106,6 +106,10 @@ PYTHONPATH=$(echo build/lib.*%{python3_version}) py.test-%{python3_version} _tes
 %endif
 
 %changelog
+* Fri Feb 09 2018 Iryna Shcherbina <ishcherb@redhat.com> - 0.13.14-3
+- Update Python 2 dependency declarations to new packaging standards
+  (See https://fedoraproject.org/wiki/FinalizingFedoraSwitchtoPython3)
+
 * Fri Feb 09 2018 Fedora Release Engineering <releng@fedoraproject.org> - 0.13.14-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
 
