@@ -1,0 +1,32 @@
+diff --git a/_doc/conf.py b/_doc/conf.py
+index 19a19a3..a2b852d 100644
+--- a/_doc/conf.py
++++ b/_doc/conf.py
+@@ -68,7 +68,10 @@ print('ruamel.yaml version', version)
+ 
+ try:
+     from ryd.__main__ import RYDCmd
+-    from ruamel.std.pathlib import Path
++    try:
++        from pathlib import Path
++    except ImportError:
++        from pathlib2 import Path
+     oldargv = sys.argv
+     for fn in Path('.').glob('*.ryd'):
+         sys.argv = ['ryd', 'convert', '--no-pdf', str(fn)]
+diff --git a/_test/test_api_change.py b/_test/test_api_change.py
+index c0f492c..0b3f2d7 100644
+--- a/_test/test_api_change.py
++++ b/_test/test_api_change.py
+@@ -11,7 +11,10 @@ import textwrap
+ import pytest
+ from ruamel.yaml import YAML
+ from ruamel.yaml.constructor import DuplicateKeyError
+-from ruamel.std.pathlib import Path
++try:
++    from pathlib import Path
++except ImportError:
++    from pathlib2 import Path
+ 
+ 
+ class TestNewAPI:

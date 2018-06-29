@@ -1,12 +1,12 @@
 %global pypi_name ruamel.yaml
 %global pname ruamel-yaml
-%global commit f29921d2048e
+%global commit 75b1b39341d9
 
 %global with_python3 1
 
 Name:           python-%{pname}
-Version:        0.13.14
-Release:        4%{?dist}
+Version:        0.15.41
+Release:        1%{?dist}
 Summary:        YAML 1.2 loader/dumper package for Python 
 
 License:        MIT
@@ -16,6 +16,9 @@ URL:            https://bitbucket.org/ruamel/yaml
 Source0:        https://bitbucket.org/ruamel/yaml/get/%{version}.tar.gz#/%{pname}-%{version}.tar.gz
 # Works with pytest 2.7
 Patch0:         python-ruamel-yaml-pytest27.patch
+
+# Don't require ruamel.std.pathlib, but use stdlib's pathlib on py3, pathlib2 on py2
+Patch1:         python-ruamel-yaml-pathlib.patch
  
 BuildRequires:  libyaml-devel
 
@@ -28,11 +31,13 @@ Summary:        YAML 1.2 loader/dumper package for Python
 BuildRequires:  python2-devel
 BuildRequires:  python2-setuptools
 # For tests
+BuildRequires:  python2-pathlib2
 BuildRequires:  python2-pytest
 BuildRequires:  python2-ruamel-ordereddict
 BuildRequires:  python2-typing >= 3.5.2.2-2
 %{?python_provide:%python_provide python2-%{pypi_name}}
  
+Requires:       python2-pathlib2
 Requires:       python2-ruamel-ordereddict
 Requires:       python2-typing >= 3.5.2.2-2
 Requires:       python2-setuptools
@@ -106,6 +111,10 @@ PYTHONPATH=$(echo build/lib.*%{python3_version}) py.test-%{python3_version} _tes
 %endif
 
 %changelog
+* Fri Jun 29 2018 Miro Hrončok <mhroncok@redhat.com> - 0.15.41-1
+- Update to 0.15.41
+- Add patch not to require ruamel.std.pathlib
+
 * Tue Jun 19 2018 Miro Hrončok <mhroncok@redhat.com> - 0.13.14-4
 - Rebuilt for Python 3.7
 
