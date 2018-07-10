@@ -20,6 +20,7 @@ Patch0:         python-ruamel-yaml-pytest27.patch
 # Don't require ruamel.std.pathlib, but use stdlib's pathlib on py3, pathlib2 on py2
 Patch1:         python-ruamel-yaml-pathlib.patch
  
+BuildRequires:  gcc
 BuildRequires:  libyaml-devel
 
 %description
