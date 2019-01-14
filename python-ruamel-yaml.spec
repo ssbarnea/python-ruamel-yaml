@@ -2,11 +2,10 @@
 %global pname ruamel-yaml
 %global commit 75b1b39341d9
 
-%global with_python3 1
 
 Name:           python-%{pname}
 Version:        0.15.41
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        YAML 1.2 loader/dumper package for Python 
 
 License:        MIT
@@ -27,27 +26,6 @@ BuildRequires:  libyaml-devel
 ruamel.yaml is a YAML 1.2 loader/dumper package for Python.
 It is a derivative of Kirill Simonov’s PyYAML 3.11
 
-%package -n     python2-%{pname}
-Summary:        YAML 1.2 loader/dumper package for Python 
-BuildRequires:  python2-devel
-BuildRequires:  python2-setuptools
-# For tests
-BuildRequires:  python2-pathlib2
-BuildRequires:  python2-pytest
-BuildRequires:  python2-ruamel-ordereddict
-BuildRequires:  python2-typing >= 3.5.2.2-2
-%{?python_provide:%python_provide python2-%{pypi_name}}
- 
-Requires:       python2-pathlib2
-Requires:       python2-ruamel-ordereddict
-Requires:       python2-typing >= 3.5.2.2-2
-Requires:       python2-setuptools
-
-%description -n python2-%{pname}
-ruamel.yaml is a YAML 1.2 loader/dumper package for Python.
-It is a derivative of Kirill Simonov’s PyYAML 3.11
-
-%if 0%{?with_python3}
 %package -n     python%{python3_pkgversion}-%{pname}
 Summary:        YAML 1.2 loader/dumper package for Python 
 BuildRequires:  python%{python3_pkgversion}-devel
@@ -68,40 +46,20 @@ Requires:       python%{python3_pkgversion}-typing
 %description -n python%{python3_pkgversion}-%{pname}
 ruamel.yaml is a YAML 1.2 loader/dumper package for Python.
 It is a derivative of Kirill Simonov’s PyYAML 3.11
-%endif
 
 %prep
 %autosetup -n %{pname}-%{commit} -p1
 rm -rf %{pypi_name}.egg-info
 
 %build
-%py2_build
-%if 0%{?with_python3}
 %py3_build
-%endif
 
 %install
-%if 0%{?with_python3}
 %{__python3} setup.py install --single-version-externally-managed --skip-build --root $RPM_BUILD_ROOT
-%endif
-
-%{__python2} setup.py install --single-version-externally-managed --skip-build --root $RPM_BUILD_ROOT
 
 %check
-PYTHONPATH=$(echo build/lib.*%{python2_version}) py.test-%{python2_version} _test/test_*.py
-%if 0%{?with_python3}
 PYTHONPATH=$(echo build/lib.*%{python3_version}) py.test-%{python3_version} _test/test_*.py
-%endif
 
-%files -n python2-%{pname}
-%license LICENSE
-%doc README.rst
-%{python2_sitearch}/ruamel
-%{python2_sitearch}/_ruamel_yaml.so
-%{python2_sitearch}/%{pypi_name}-%{version}-py?.?-*.pth
-%{python2_sitearch}/%{pypi_name}-%{version}-py?.?.egg-info
-
-%if 0%{?with_python3}
 %files -n python%{python3_pkgversion}-%{pname}
 %license LICENSE
 %doc README.rst
@@ -109,9 +67,12 @@ PYTHONPATH=$(echo build/lib.*%{python3_version}) py.test-%{python3_version} _tes
 %{python3_sitearch}/_ruamel_yaml.cpython-*
 %{python3_sitearch}/%{pypi_name}-%{version}-py?.?-*.pth
 %{python3_sitearch}/%{pypi_name}-%{version}-py?.?.egg-info
-%endif
 
 %changelog
+* Mon Jan 14 2019 Miro Hrončok <mhroncok@redhat.com> - 0.15.41-3
+- Subpackage python2-ruamel-yaml has been removed
+  See https://fedoraproject.org/wiki/Changes/Mass_Python_2_Package_Removal
+
 * Sat Jul 14 2018 Fedora Release Engineering <releng@fedoraproject.org> - 0.15.41-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
 
