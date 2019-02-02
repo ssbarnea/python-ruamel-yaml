@@ -5,7 +5,7 @@
 
 Name:           python-%{pname}
 Version:        0.15.41
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        YAML 1.2 loader/dumper package for Python 
 
 License:        MIT
@@ -69,6 +69,9 @@ PYTHONPATH=$(echo build/lib.*%{python3_version}) py.test-%{python3_version} _tes
 %{python3_sitearch}/%{pypi_name}-%{version}-py?.?.egg-info
 
 %changelog
+* Sat Feb 02 2019 Fedora Release Engineering <releng@fedoraproject.org> - 0.15.41-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
+
 * Mon Jan 14 2019 Miro Hrončok <mhroncok@redhat.com> - 0.15.41-3
 - Subpackage python2-ruamel-yaml has been removed
   See https://fedoraproject.org/wiki/Changes/Mass_Python_2_Package_Removal
