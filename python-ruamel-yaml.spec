@@ -1,12 +1,12 @@
 %global pypi_name ruamel.yaml
 %global pname ruamel-yaml
-%global commit 75b1b39341d9
+%global commit ff02b83b8f91
 
 
 Name:           python-%{pname}
-Version:        0.15.41
-Release:        6%{?dist}
-Summary:        YAML 1.2 loader/dumper package for Python 
+Version:        0.16.5
+Release:        1%{?dist}
+Summary:        YAML 1.2 loader/dumper package for Python
 
 License:        MIT
 URL:            https://bitbucket.org/ruamel/yaml
@@ -18,7 +18,7 @@ Patch0:         python-ruamel-yaml-pytest27.patch
 
 # Don't require ruamel.std.pathlib, but use stdlib's pathlib on py3, pathlib2 on py2
 Patch1:         python-ruamel-yaml-pathlib.patch
- 
+
 BuildRequires:  gcc
 BuildRequires:  libyaml-devel
 
@@ -27,7 +27,7 @@ ruamel.yaml is a YAML 1.2 loader/dumper package for Python.
 It is a derivative of Kirill Simonov’s PyYAML 3.11
 
 %package -n     python%{python3_pkgversion}-%{pname}
-Summary:        YAML 1.2 loader/dumper package for Python 
+Summary:        YAML 1.2 loader/dumper package for Python
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-setuptools
 # For tests
@@ -69,6 +69,9 @@ PYTHONPATH=$(echo build/lib.*%{python3_version}) py.test-%{python3_version} _tes
 %{python3_sitearch}/%{pypi_name}-%{version}-py?.?.egg-info
 
 %changelog
+* Tue Aug 27 2019 Chedi Toueiti <chedi.toueiti@gmail.com> - 0.16.5-1
+- Update to 0.16.5
+
 * Mon Aug 19 2019 Miro Hrončok <mhroncok@redhat.com> - 0.15.41-6
 - Rebuilt for Python 3.8
 
