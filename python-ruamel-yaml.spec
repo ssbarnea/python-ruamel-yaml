@@ -1,7 +1,7 @@
 %global pypi_name ruamel.yaml
 %global pname ruamel-yaml
 %global commit ff02b83b8f91
-
+%global debug_package %{nil}
 
 Name:           python-%{pname}
 Version:        0.16.5
@@ -10,7 +10,6 @@ Summary:        YAML 1.2 loader/dumper package for Python
 
 License:        MIT
 URL:            https://bitbucket.org/ruamel/yaml
-#Source0:        https://files.pythonhosted.org/packages/source/r/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
 # Use bitbucket sources so we can run the tests
 Source0:        https://bitbucket.org/ruamel/yaml/get/%{version}.tar.gz#/%{pname}-%{version}.tar.gz
 # Works with pytest 2.7
@@ -58,15 +57,14 @@ rm -rf %{pypi_name}.egg-info
 %{__python3} setup.py install --single-version-externally-managed --skip-build --root $RPM_BUILD_ROOT
 
 %check
-PYTHONPATH=$(echo build/lib.*%{python3_version}) py.test-%{python3_version} _test/test_*.py
+PYTHONPATH=$(echo build/lib) py.test-%{python3_version} _test/test_*.py
 
 %files -n python%{python3_pkgversion}-%{pname}
 %license LICENSE
 %doc README.rst
-%{python3_sitearch}/ruamel
-%{python3_sitearch}/_ruamel_yaml.cpython-*
-%{python3_sitearch}/%{pypi_name}-%{version}-py?.?-*.pth
-%{python3_sitearch}/%{pypi_name}-%{version}-py?.?.egg-info
+%{python3_sitelib}/ruamel
+%{python3_sitelib}/%{pypi_name}-%{version}-py?.?-*.pth
+%{python3_sitelib}/%{pypi_name}-%{version}-py?.?.egg-info
 
 %changelog
 * Tue Aug 27 2019 Chedi Toueiti <chedi.toueiti@gmail.com> - 0.16.5-1
