@@ -5,7 +5,7 @@
 
 Name:           python-%{pname}
 Version:        0.16.5
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        YAML 1.2 loader/dumper package for Python
 
 License:        MIT
@@ -18,8 +18,6 @@ Patch0:         python-ruamel-yaml-pytest27.patch
 # Don't require ruamel.std.pathlib, but use stdlib's pathlib on py3, pathlib2 on py2
 Patch1:         python-ruamel-yaml-pathlib.patch
 
-BuildRequires:  gcc
-BuildRequires:  libyaml-devel
 
 %description
 ruamel.yaml is a YAML 1.2 loader/dumper package for Python.
@@ -37,6 +35,7 @@ BuildRequires:  python%{python3_pkgversion}-typing
 %endif
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 
+Requires:       python%{python3_pkgversion}-ruamel-yaml-clib
 Requires:       python%{python3_pkgversion}-setuptools
 %if %{python3_pkgversion} == 34
 Requires:       python%{python3_pkgversion}-typing
@@ -67,6 +66,9 @@ PYTHONPATH=$(echo build/lib) py.test-%{python3_version} _test/test_*.py
 %{python3_sitelib}/%{pypi_name}-%{version}-py?.?.egg-info
 
 %changelog
+* Fri Aug 30 2019 Chandan Kumar <raukadah@gmail.com> - 0.16.5-2
+- Added ruamel-yaml-clib as Requires
+
 * Tue Aug 27 2019 Chedi Toueiti <chedi.toueiti@gmail.com> - 0.16.5-1
 - Update to 0.16.5
 
