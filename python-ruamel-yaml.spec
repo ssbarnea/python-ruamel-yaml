@@ -5,7 +5,7 @@
 
 Name:           python-%{pname}
 Version:        0.16.5
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        YAML 1.2 loader/dumper package for Python
 
 License:        MIT
@@ -66,6 +66,9 @@ PYTHONPATH=$(echo build/lib) py.test-%{python3_version} _test/test_*.py
 %{python3_sitelib}/%{pypi_name}-%{version}-py?.?.egg-info
 
 %changelog
+* Thu Oct 03 2019 Miro Hrončok <mhroncok@redhat.com> - 0.16.5-3
+- Rebuilt for Python 3.8.0rc1 (#1748018)
+
 * Fri Aug 30 2019 Chandan Kumar <raukadah@gmail.com> - 0.16.5-2
 - Added ruamel-yaml-clib as Requires
 
