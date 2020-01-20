@@ -1,11 +1,11 @@
 %global pypi_name ruamel.yaml
 %global pname ruamel-yaml
-%global commit ff02b83b8f91
+%global commit 44504659794e
 %global debug_package %{nil}
 
 Name:           python-%{pname}
-Version:        0.16.5
-Release:        3%{?dist}
+Version:        0.16.6
+Release:        1%{?dist}
 Summary:        YAML 1.2 loader/dumper package for Python
 
 License:        MIT
@@ -66,6 +66,9 @@ PYTHONPATH=$(echo build/lib) py.test-%{python3_version} _test/test_*.py
 %{python3_sitelib}/%{pypi_name}-%{version}-py?.?.egg-info
 
 %changelog
+* Mon Jan 20 2019 Jason Montleon <jmontleo@redhat.com> - 0.16.6-1
+- Update to 0.16.6
+
 * Thu Oct 03 2019 Miro Hrončok <mhroncok@redhat.com> - 0.16.5-3
 - Rebuilt for Python 3.8.0rc1 (#1748018)
 
