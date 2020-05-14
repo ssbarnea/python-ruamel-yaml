@@ -69,7 +69,7 @@ PYTHONPATH=$(echo build/lib) py.test-%{python3_version} _test/test_*.py
 * Thu Jan 30 2020 Fedora Release Engineering <releng@fedoraproject.org> - 0.16.6-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
 
-* Mon Jan 20 2019 Jason Montleon <jmontleo@redhat.com> - 0.16.6-1
+* Mon Jan 20 2020 Jason Montleon <jmontleo@redhat.com> - 0.16.6-1
 - Update to 0.16.6
 
 * Thu Oct 03 2019 Miro Hrončok <mhroncok@redhat.com> - 0.16.5-3
