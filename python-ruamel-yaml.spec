@@ -62,8 +62,8 @@ PYTHONPATH=$(echo build/lib) py.test-%{python3_version} _test/test_*.py
 %license LICENSE
 %doc README.rst
 %{python3_sitelib}/ruamel
-%{python3_sitelib}/%{pypi_name}-%{version}-py?.?-*.pth
-%{python3_sitelib}/%{pypi_name}-%{version}-py?.?.egg-info
+%{python3_sitelib}/%{pypi_name}-%{version}-py%{python3_version}-*.pth
+%{python3_sitelib}/%{pypi_name}-%{version}-py%{python3_version}.egg-info
 
 %changelog
 * Tue May 26 2020 Miro Hrončok <mhroncok@redhat.com> - 0.16.6-3
