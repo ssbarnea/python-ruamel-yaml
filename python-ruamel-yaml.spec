@@ -1,19 +1,17 @@
 %global pypi_name ruamel.yaml
 %global pname ruamel-yaml
-%global commit 44504659794e
+%global commit 44504659794e463523ff8d0b40bac18dfe3b52f8
 %global debug_package %{nil}
 
 Name:           python-%{pname}
 Version:        0.16.6
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        YAML 1.2 loader/dumper package for Python
 
 License:        MIT
-URL:            https://bitbucket.org/ruamel/yaml
+URL:            https://sourceforge.net/projects/ruamel-yaml
 # Use bitbucket sources so we can run the tests
-Source0:        https://bitbucket.org/ruamel/yaml/get/%{version}.tar.gz#/%{pname}-%{version}.tar.gz
-# Works with pytest 2.7
-Patch0:         python-ruamel-yaml-pytest27.patch
+Source0:        https://sourceforge.net/code-snapshots/hg/r/ru/ruamel-yaml/code/%{pname}-code-%{commit}.zip
 
 # Don't require ruamel.std.pathlib, but use stdlib's pathlib on py3, pathlib2 on py2
 Patch1:         python-ruamel-yaml-pathlib.patch
@@ -46,7 +44,7 @@ ruamel.yaml is a YAML 1.2 loader/dumper package for Python.
 It is a derivative of Kirill Simonov’s PyYAML 3.11
 
 %prep
-%autosetup -n %{pname}-%{commit} -p1
+%autosetup -n %{pname}-code-%{commit} -p1
 rm -rf %{pypi_name}.egg-info
 
 %build
@@ -66,6 +64,10 @@ PYTHONPATH=$(echo build/lib) py.test-%{python3_version} _test/test_*.py
 %{python3_sitelib}/%{pypi_name}-%{version}-py%{python3_version}.egg-info
 
 %changelog
+* Mon Feb 22 2021 Joel Capitao <jcapitao@redhat.com> - 0.16.6-6
+- Change upstream URL
+- Remove obsolete patch
+
 * Wed Jan 27 2021 Fedora Release Engineering <releng@fedoraproject.org> - 0.16.6-5
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
 
