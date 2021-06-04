@@ -5,7 +5,7 @@
 
 Name:           python-%{pname}
 Version:        0.16.6
-Release:        6%{?dist}
+Release:        7%{?dist}
 Summary:        YAML 1.2 loader/dumper package for Python
 
 License:        MIT
@@ -64,6 +64,9 @@ PYTHONPATH=$(echo build/lib) py.test-%{python3_version} _test/test_*.py
 %{python3_sitelib}/%{pypi_name}-%{version}-py%{python3_version}.egg-info
 
 %changelog
+* Fri Jun 04 2021 Python Maint <python-maint@redhat.com> - 0.16.6-7
+- Rebuilt for Python 3.10
+
 * Mon Feb 22 2021 Joel Capitao <jcapitao@redhat.com> - 0.16.6-6
 - Change upstream URL
 - Remove obsolete patch
