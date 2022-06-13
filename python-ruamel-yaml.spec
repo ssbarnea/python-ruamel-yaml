@@ -5,7 +5,7 @@
 
 Name:           python-%{pname}
 Version:        0.17.21
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        YAML 1.2 loader/dumper package for Python
 
 License:        MIT
@@ -61,6 +61,9 @@ rm -rf %{pypi_name}.egg-info
 %{python3_sitelib}/%{pypi_name}-%{version}-py%{python3_version}.egg-info
 
 %changelog
+* Mon Jun 13 2022 Python Maint <python-maint@redhat.com> - 0.17.21-2
+- Rebuilt for Python 3.11
+
 * Tue May 10 2022 Jakub Čajka <jcajka@redhat.com> - 0.17.21-1
 - Update to 0.17.21
 - Related: BZ#2042422
