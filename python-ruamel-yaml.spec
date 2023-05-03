@@ -5,9 +5,10 @@
 
 Name:           python-%{pname}
 Version:        0.17.22
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        YAML 1.2 loader/dumper package for Python
 
+# SPDX
 License:        MIT
 URL:            https://sourceforge.net/projects/ruamel-yaml
 # Use bitbucket sources so we can run the tests
@@ -60,6 +61,9 @@ rm -rf %{pypi_name}.egg-info
 %{python3_sitelib}/%{pypi_name}-%{version}-py%{python3_version}.egg-info
 
 %changelog
+* Thu May 04 2023 Benjamin A. Beasley <code@musicinmybrain.net> - 0.17.22-2
+- Confirm License is SPDX MIT
+
 * Wed May 03 2023 Maxwell G <maxwell@gtmx.me> - 0.17.22-1
 - Update to 0.17.22. Fixes rhbz#2192464.
 
