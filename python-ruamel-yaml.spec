@@ -22,10 +22,8 @@ comments, seq/map flow style, and map key order.}
 
 %package -n     python3-ruamel-yaml
 Summary:        YAML 1.2 loader/dumper package for Python
+
 BuildRequires:  python3-devel
-BuildRequires:  python3-setuptools
-# For tests
-BuildRequires:  python3-pytest
 
 %py_provides python3-ruamel.yaml
 
@@ -37,22 +35,25 @@ BuildRequires:  python3-pytest
 # implementation (ruamel.yaml.clib dependency) may be used. Patch this out.
 sed -r -i 's/( and python_version<"[^"]+")(.*ruamel\.yaml\.clib)/\2/' \
     __init__.py
-rm -rf ruamel.yaml.egg-info
+
+%generate_buildrequires
+%pyproject_buildrequires -t
 
 %build
-%py3_build
+%pyproject_wheel
 
 %install
-%{python3} setup.py install --single-version-externally-managed --skip-build --root $RPM_BUILD_ROOT
+%pyproject_install
+# RFE: Add option for namespace packages to %%pyproject_save_files
+# https://bugzilla.redhat.com/show_bug.cgi?id=1935266
+%pyproject_save_files ruamel
 
 %check
 %pytest _test/test_*.py
 
-%files -n python3-ruamel-yaml
-%license LICENSE
+%files -n python3-ruamel-yaml -f %{pyproject_files}
+# pyproject_files handles LICENSE; verify with “rpm -qL -p …”
 %doc README.rst
-%{python3_sitelib}/ruamel
-%{python3_sitelib}/ruamel.yaml-%{version}-py%{python3_version}.egg-info
 
 %changelog
 * Thu May 04 2023 Benjamin A. Beasley <code@musicinmybrain.net> - 0.17.22-2
@@ -62,6 +63,7 @@ rm -rf ruamel.yaml.egg-info
 - Make the package noarch (python-ruamel-yaml-clib contains the compiled code)
 - Fix upper-bounded Python interpreter version for ruamel.yaml.clib dependency
 - Drop unused manual runtime dependency on setuptools
+- Port to pyproject-rpm-macros (“new Python guidelines”)
 
 * Wed May 03 2023 Maxwell G <maxwell@gtmx.me> - 0.17.22-1
 - Update to 0.17.22. Fixes rhbz#2192464.
