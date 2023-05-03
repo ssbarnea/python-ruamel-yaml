@@ -29,13 +29,16 @@ BuildRequires:  python3-pytest
 
 %py_provides python3-ruamel.yaml
 
-Requires:       python3-ruamel-yaml-clib
 Requires:       python3-setuptools
 
 %description -n python3-ruamel-yaml %{_description}
 
 %prep
-%autosetup -n ruamel-yaml-code-%{commit} -p1
+%autosetup -n ruamel-yaml-code-%{commit}
+# Upstream upper-bounds the Python interpeter versions with which the C
+# implementation (ruamel.yaml.clib dependency) may be used. Patch this out.
+sed -r -i 's/( and python_version<"[^"]+")(.*ruamel\.yaml\.clib)/\2/' \
+    __init__.py
 rm -rf ruamel.yaml.egg-info
 
 %build
@@ -59,6 +62,7 @@ rm -rf ruamel.yaml.egg-info
 - Reduce macro indirection and drop ancient constructs and conditionals
 - Update description from upstream
 - Make the package noarch (python-ruamel-yaml-clib contains the compiled code)
+- Fix upper-bounded Python interpreter version for ruamel.yaml.clib dependency
 
 * Wed May 03 2023 Maxwell G <maxwell@gtmx.me> - 0.17.22-1
 - Update to 0.17.22. Fixes rhbz#2192464.
