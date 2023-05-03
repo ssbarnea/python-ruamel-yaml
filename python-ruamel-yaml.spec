@@ -1,5 +1,4 @@
 %global commit 56b3e2666fb275deab3eec99193c103e4edf93bb
-%global debug_package %{nil}
 
 Name:           python-ruamel-yaml
 Version:        0.17.22
@@ -12,6 +11,8 @@ URL:            https://sourceforge.net/projects/ruamel-yaml
 # Use bitbucket sources so we can run the tests
 # https://sourceforge.net/code-snapshots/hg/r/ru/ruamel-yaml/code/ruamel-yaml-code-58889c2d944d5d0b22948a15d6fcb97c68d599de.zip
 Source0:        https://sourceforge.net/code-snapshots/hg/r/ru/ruamel-yaml/code/ruamel-yaml-code-%{commit}.zip
+
+BuildArch:      noarch
 
 %global _description %{expand:
 ruamel.yaml is a YAML parser/emitter that supports roundtrip preservation of
@@ -57,6 +58,7 @@ rm -rf ruamel.yaml.egg-info
 - Confirm License is SPDX MIT
 - Reduce macro indirection and drop ancient constructs and conditionals
 - Update description from upstream
+- Make the package noarch (python-ruamel-yaml-clib contains the compiled code)
 
 * Wed May 03 2023 Maxwell G <maxwell@gtmx.me> - 0.17.22-1
 - Update to 0.17.22. Fixes rhbz#2192464.
