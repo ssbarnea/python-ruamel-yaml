@@ -13,9 +13,11 @@ URL:            https://sourceforge.net/projects/ruamel-yaml
 # https://sourceforge.net/code-snapshots/hg/r/ru/ruamel-yaml/code/ruamel-yaml-code-58889c2d944d5d0b22948a15d6fcb97c68d599de.zip
 Source0:        https://sourceforge.net/code-snapshots/hg/r/ru/ruamel-yaml/code/ruamel-yaml-code-%{commit}.zip
 
-%description
-ruamel.yaml is a YAML 1.2 loader/dumper package for Python.
-It is a derivative of Kirill Simonov’s PyYAML 3.11
+%global _description %{expand:
+ruamel.yaml is a YAML parser/emitter that supports roundtrip preservation of
+comments, seq/map flow style, and map key order.}
+
+%description %{_description}
 
 %package -n     python3-ruamel-yaml
 Summary:        YAML 1.2 loader/dumper package for Python
@@ -29,9 +31,7 @@ BuildRequires:  python3-pytest
 Requires:       python3-ruamel-yaml-clib
 Requires:       python3-setuptools
 
-%description -n python3-ruamel-yaml
-ruamel.yaml is a YAML 1.2 loader/dumper package for Python.
-It is a derivative of Kirill Simonov’s PyYAML 3.11
+%description -n python3-ruamel-yaml %{_description}
 
 %prep
 %autosetup -n ruamel-yaml-code-%{commit} -p1
@@ -56,6 +56,7 @@ rm -rf ruamel.yaml.egg-info
 * Thu May 04 2023 Benjamin A. Beasley <code@musicinmybrain.net> - 0.17.22-2
 - Confirm License is SPDX MIT
 - Reduce macro indirection and drop ancient constructs and conditionals
+- Update description from upstream
 
 * Wed May 03 2023 Maxwell G <maxwell@gtmx.me> - 0.17.22-1
 - Update to 0.17.22. Fixes rhbz#2192464.
