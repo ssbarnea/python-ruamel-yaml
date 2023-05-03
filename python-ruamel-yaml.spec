@@ -29,8 +29,6 @@ BuildRequires:  python3-pytest
 
 %py_provides python3-ruamel.yaml
 
-Requires:       python3-setuptools
-
 %description -n python3-ruamel-yaml %{_description}
 
 %prep
@@ -63,6 +61,7 @@ rm -rf ruamel.yaml.egg-info
 - Update description from upstream
 - Make the package noarch (python-ruamel-yaml-clib contains the compiled code)
 - Fix upper-bounded Python interpreter version for ruamel.yaml.clib dependency
+- Drop unused manual runtime dependency on setuptools
 
 * Wed May 03 2023 Maxwell G <maxwell@gtmx.me> - 0.17.22-1
 - Update to 0.17.22. Fixes rhbz#2192464.
