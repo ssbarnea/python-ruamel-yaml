@@ -1,9 +1,7 @@
-%global pypi_name ruamel.yaml
-%global pname ruamel-yaml
 %global commit 56b3e2666fb275deab3eec99193c103e4edf93bb
 %global debug_package %{nil}
 
-Name:           python-%{pname}
+Name:           python-ruamel-yaml
 Version:        0.17.22
 Release:        2%{?dist}
 Summary:        YAML 1.2 loader/dumper package for Python
@@ -13,56 +11,51 @@ License:        MIT
 URL:            https://sourceforge.net/projects/ruamel-yaml
 # Use bitbucket sources so we can run the tests
 # https://sourceforge.net/code-snapshots/hg/r/ru/ruamel-yaml/code/ruamel-yaml-code-58889c2d944d5d0b22948a15d6fcb97c68d599de.zip
-Source0:        https://sourceforge.net/code-snapshots/hg/r/ru/ruamel-yaml/code/%{pname}-code-%{commit}.zip
+Source0:        https://sourceforge.net/code-snapshots/hg/r/ru/ruamel-yaml/code/ruamel-yaml-code-%{commit}.zip
 
 %description
 ruamel.yaml is a YAML 1.2 loader/dumper package for Python.
 It is a derivative of Kirill Simonov’s PyYAML 3.11
 
-%package -n     python%{python3_pkgversion}-%{pname}
+%package -n     python3-ruamel-yaml
 Summary:        YAML 1.2 loader/dumper package for Python
-BuildRequires:  python%{python3_pkgversion}-devel
-BuildRequires:  python%{python3_pkgversion}-setuptools
+BuildRequires:  python3-devel
+BuildRequires:  python3-setuptools
 # For tests
-BuildRequires:  python%{python3_pkgversion}-pytest
-# typing was added in Python 3.5
-%if %{python3_pkgversion} == 34
-BuildRequires:  python%{python3_pkgversion}-typing
-%endif
-%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
+BuildRequires:  python3-pytest
 
-Requires:       python%{python3_pkgversion}-ruamel-yaml-clib
-Requires:       python%{python3_pkgversion}-setuptools
-%if %{python3_pkgversion} == 34
-Requires:       python%{python3_pkgversion}-typing
-%endif
+%py_provides python3-ruamel.yaml
 
-%description -n python%{python3_pkgversion}-%{pname}
+Requires:       python3-ruamel-yaml-clib
+Requires:       python3-setuptools
+
+%description -n python3-ruamel-yaml
 ruamel.yaml is a YAML 1.2 loader/dumper package for Python.
 It is a derivative of Kirill Simonov’s PyYAML 3.11
 
 %prep
-%autosetup -n %{pname}-code-%{commit} -p1
-rm -rf %{pypi_name}.egg-info
+%autosetup -n ruamel-yaml-code-%{commit} -p1
+rm -rf ruamel.yaml.egg-info
 
 %build
 %py3_build
 
 %install
-%{__python3} setup.py install --single-version-externally-managed --skip-build --root $RPM_BUILD_ROOT
+%{python3} setup.py install --single-version-externally-managed --skip-build --root $RPM_BUILD_ROOT
 
 %check
 %pytest _test/test_*.py
 
-%files -n python%{python3_pkgversion}-%{pname}
+%files -n python3-ruamel-yaml
 %license LICENSE
 %doc README.rst
 %{python3_sitelib}/ruamel
-%{python3_sitelib}/%{pypi_name}-%{version}-py%{python3_version}.egg-info
+%{python3_sitelib}/ruamel.yaml-%{version}-py%{python3_version}.egg-info
 
 %changelog
 * Thu May 04 2023 Benjamin A. Beasley <code@musicinmybrain.net> - 0.17.22-2
 - Confirm License is SPDX MIT
+- Reduce macro indirection and drop ancient constructs and conditionals
 
 * Wed May 03 2023 Maxwell G <maxwell@gtmx.me> - 0.17.22-1
 - Update to 0.17.22. Fixes rhbz#2192464.
