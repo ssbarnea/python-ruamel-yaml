@@ -10,7 +10,7 @@ License:        MIT
 URL:            https://sourceforge.net/projects/ruamel-yaml
 # Use bitbucket sources so we can run the tests
 # https://sourceforge.net/code-snapshots/hg/r/ru/ruamel-yaml/code/ruamel-yaml-code-58889c2d944d5d0b22948a15d6fcb97c68d599de.zip
-Source0:        https://sourceforge.net/code-snapshots/hg/r/ru/ruamel-yaml/code/ruamel-yaml-code-%{commit}.zip
+Source:         https://sourceforge.net/code-snapshots/hg/r/ru/ruamel-yaml/code/ruamel-yaml-code-%{commit}.zip
 
 BuildArch:      noarch
 
@@ -64,6 +64,7 @@ sed -r -i 's/( and python_version<"[^"]+")(.*ruamel\.yaml\.clib)/\2/' \
 - Fix upper-bounded Python interpreter version for ruamel.yaml.clib dependency
 - Drop unused manual runtime dependency on setuptools
 - Port to pyproject-rpm-macros (“new Python guidelines”)
+- Stop numbering the source archive
 
 * Wed May 03 2023 Maxwell G <maxwell@gtmx.me> - 0.17.22-1
 - Update to 0.17.22. Fixes rhbz#2192464.
