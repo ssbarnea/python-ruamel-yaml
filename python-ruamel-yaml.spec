@@ -1,3 +1,6 @@
+# Breaks the circular dependency with ruamel.yaml.clib.
+%bcond_with bootstrap
+
 %global commit 56b3e2666fb275deab3eec99193c103e4edf93bb
 
 Name:           python-ruamel-yaml
@@ -35,6 +38,9 @@ BuildRequires:  python3-devel
 # implementation (ruamel.yaml.clib dependency) may be used. Patch this out.
 sed -r -i 's/( and python_version<"[^"]+")(.*ruamel\.yaml\.clib)/\2/' \
     __init__.py
+%if %{with bootstrap}
+sed -r -i 's/^([[:blank:]]*)(.*ruamel\.yaml\.clib)/\1# \2/' __init__.py
+%endif
 
 %generate_buildrequires
 %pyproject_buildrequires -t
@@ -49,7 +55,12 @@ sed -r -i 's/( and python_version<"[^"]+")(.*ruamel\.yaml\.clib)/\2/' \
 %pyproject_save_files ruamel
 
 %check
-%pytest _test/test_*.py
+%if %{with bootstrap}
+k="${k-}${k+ and }not test_load_cyaml"
+k="${k-}${k+ and }not test_load_cyaml_1_2"
+k="${k-}${k+ and }not test_dump_cyaml_1_2"
+%endif
+%pytest -k "${k-}" _test/test_*.py
 
 %files -n python3-ruamel-yaml -f %{pyproject_files}
 # pyproject_files handles LICENSE; verify with “rpm -qL -p …”
@@ -65,6 +76,8 @@ sed -r -i 's/( and python_version<"[^"]+")(.*ruamel\.yaml\.clib)/\2/' \
 - Drop unused manual runtime dependency on setuptools
 - Port to pyproject-rpm-macros (“new Python guidelines”)
 - Stop numbering the source archive
+- Add a bootstrap conditional to break the circular dependency with
+  ruamel.yaml.clib
 
 * Wed May 03 2023 Maxwell G <maxwell@gtmx.me> - 0.17.22-1
 - Update to 0.17.22. Fixes rhbz#2192464.
