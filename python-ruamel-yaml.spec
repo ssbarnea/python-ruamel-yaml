@@ -1,11 +1,11 @@
 %global pypi_name ruamel.yaml
 %global pname ruamel-yaml
-%global commit c887dfe19e2f01b770a2b4b04163a01e00a33f85
+%global commit 56b3e2666fb275deab3eec99193c103e4edf93bb
 %global debug_package %{nil}
 
 Name:           python-%{pname}
-Version:        0.17.21
-Release:        4%{?dist}
+Version:        0.17.22
+Release:        1%{?dist}
 Summary:        YAML 1.2 loader/dumper package for Python
 
 License:        MIT
@@ -57,10 +57,12 @@ rm -rf %{pypi_name}.egg-info
 %license LICENSE
 %doc README.rst
 %{python3_sitelib}/ruamel
-%{python3_sitelib}/%{pypi_name}-%{version}-py%{python3_version}-*.pth
 %{python3_sitelib}/%{pypi_name}-%{version}-py%{python3_version}.egg-info
 
 %changelog
+* Wed May 03 2023 Maxwell G <maxwell@gtmx.me> - 0.17.22-1
+- Update to 0.17.22. Fixes rhbz#2192464.
+
 * Fri Jan 20 2023 Fedora Release Engineering <releng@fedoraproject.org> - 0.17.21-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_38_Mass_Rebuild
 
