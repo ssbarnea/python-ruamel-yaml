@@ -11,8 +11,7 @@ Summary:        YAML 1.2 loader/dumper package for Python
 # SPDX
 License:        MIT
 URL:            https://sourceforge.net/projects/ruamel-yaml
-# Use bitbucket sources so we can run the tests
-# https://sourceforge.net/code-snapshots/hg/r/ru/ruamel-yaml/code/ruamel-yaml-code-58889c2d944d5d0b22948a15d6fcb97c68d599de.zip
+# The PyPI sdist does not contain tests, so we use a snapshot from SourceForge
 Source:         https://sourceforge.net/code-snapshots/hg/r/ru/ruamel-yaml/code/ruamel-yaml-code-%{commit}.zip
 
 BuildArch:      noarch
@@ -78,6 +77,7 @@ k="${k-}${k+ and }not test_dump_cyaml_1_2"
 - Stop numbering the source archive
 - Add a bootstrap conditional to break the circular dependency with
   ruamel.yaml.clib
+- Fix an obsolete comment referring to bitbucket
 
 * Wed May 03 2023 Maxwell G <maxwell@gtmx.me> - 0.17.22-1
 - Update to 0.17.22. Fixes rhbz#2192464.
